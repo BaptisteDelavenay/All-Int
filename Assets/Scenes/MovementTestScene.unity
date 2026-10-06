@@ -399,8 +399,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1030163634}
   - component: {fileID: 1030163633}
-  - component: {fileID: 1030163632}
   - component: {fileID: 1030163631}
+  - component: {fileID: 1030163632}
   m_Layer: 0
   m_Name: PlayerFollowCamera
   m_TagString: Untagged
