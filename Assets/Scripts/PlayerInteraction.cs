@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float interactionDistance = 3.0f; // Distance à laquelle le joueur peut intéragir avec un objet
     [SerializeField] private LayerMask interactMask; // Choisir le masque sur lequel le raycast fonctionnera. Le but est de le faire fonctionner uniquement sur les objets collectibles
     [SerializeField] private Inventory inventory; // Inventaire du joueur
+    [SerializeField] private TMP_Text promptText; // Texte qui apparait au hover du billet  
     private Outline currentOutline;
     RaycastHit hit; // Permet de stocker la fiche des infos de l'objet touché par le Raycast
 
@@ -18,6 +20,7 @@ public class PlayerInteraction : MonoBehaviour
         bool isLookingAt = Physics.Raycast(ray, out hit, interactionDistance, interactMask); // Lancer le rayacst
 
         Outline newOutline = null;
+        bool showPrompt = false;
 
         if(isLookingAt) // Si il regarde un élément
         {
@@ -25,6 +28,10 @@ public class PlayerInteraction : MonoBehaviour
             newOutline = hit.collider.GetComponent<Outline>();
 
             if (pickup != null) // Si il contient un script alors on affiche le nom de l'item défini dans PickUp.cs
+
+            showPrompt = true;
+            promptText.text = $"[E] pour ramasser {pickup.ItemName}";
+            
             {
                 if(Keyboard.current.eKey.wasPressedThisFrame) // Si la touche E est préssé
                 {
@@ -48,6 +55,7 @@ public class PlayerInteraction : MonoBehaviour
             currentOutline=newOutline;
         }
 
-       
+        promptText.gameObject.SetActive(showPrompt);
+
     }
 }
