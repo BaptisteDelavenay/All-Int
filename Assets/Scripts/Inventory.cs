@@ -7,8 +7,9 @@ public class Inventory : MonoBehaviour
 {
     private Dictionary<string, int> items = new Dictionary<string, int>();
     [SerializeField] private TMP_Text InventoryDisplay; // Inventaire (texte en haut a gauche de l'écran) 
-    [SerializeField] private int money = 0; // Inventaire (texte en haut a gauche de l'écran) 
-    [SerializeField] private string currency = "$"; // Inventaire (texte en haut a gauche de l'écran) 
+    [SerializeField] private int billValue = 10; // Valeure du billet. Ex : 1 billet = 10$ 
+    [SerializeField] private int money = 0; // Qtt argent dans l'inventaire
+    [SerializeField] private string currency = "$"; // Devise 
 
     public void Start()
     {
@@ -36,7 +37,7 @@ public class Inventory : MonoBehaviour
         {
             if(item.Key=="Billet")
             {
-                money+=10;
+                money+=billValue;
             }
         }
 
